@@ -1,5 +1,3 @@
-import tf from "@tensorflow/tfjs-node";
-
 export function norm(xs, min, max) {
   const t2d = tf.tensor2d(xs);
   const minv = min || t2d.min(0);

@@ -16,10 +16,9 @@
  *   [0, 1] -> Approved (Class 1)
  */
 
-import tf from "@tensorflow/tfjs-node";
 import * as utils  from "./utils.js";
 
-export default async function tranning(xs, ys) {
+export default async function tranning(xs, ys, callbacks) {
   const model = tf.sequential();
 
   model.add(
@@ -49,7 +48,7 @@ export default async function tranning(xs, ys) {
     verbose: 0,
     epochs: 500,
     shuffle: true,
-    callbacks: {
+    callbacks: callbacks || {
       onEpochEnd(epoch, log) {
         console.log(`Epoch: ${epoch}, Loss: ${log.loss}`);
       },

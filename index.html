@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Aprovação de alunos - fronteira de decisão</title>
+    <style>
+      :root {
+        --surface: #fcfcfb;
+        --text-primary: #0b0b0b;
+        --text-secondary: #52514e;
+        --grid: #e6e5e1;
+        --approved: #2a78d6;
+        --rejected: #e34948;
+      }
+      body { font-family: sans-serif; padding: 20px; background: var(--surface); color: var(--text-primary); }
+      h1 { color: #333; font-size: 20px; margin: 0 0 4px; }
+      p { color: var(--text-secondary); margin: 0 0 16px; }
+      .legend { display: flex; gap: 20px; font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
+      .legend span { display: inline-flex; align-items: center; gap: 6px; }
+      .legend svg { overflow: visible; }
+      .chart { position: relative; width: 720px; }
+      canvas { display: block; }
+      #tooltip {
+        position: absolute; pointer-events: none; display: none;
+        background: #fff; border: 1px solid var(--grid); border-radius: 6px;
+        padding: 6px 10px; font-size: 12px; line-height: 1.5;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); white-space: nowrap;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis@1.5.1/dist/tfjs-vis.umd.min.js"></script>
+  </head>
+  <body>
+    <h1>Fronteira de decisão: horas de estudo × frequência</h1>
+    <p id="status">Treinando o modelo...</p>
+
+    <div class="legend">
+      <span><svg width="10" height="10"><circle cx="5" cy="5" r="5" fill="var(--approved)" /></svg>Aprovado (real)</span>
+      <span><svg width="10" height="10"><rect width="10" height="10" fill="var(--rejected)" /></svg>Reprovado (real)</span>
+      <span><svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="none" stroke="#0b0b0b" stroke-width="2" /></svg>Erro do modelo</span>
+      <span><svg width="20" height="4"><line x1="0" y1="2" x2="20" y2="2" stroke="#0b0b0b" stroke-width="2" /></svg>Fronteira (50%)</span>
+    </div>
+
+    <div class="chart">
+      <canvas id="boundary"></canvas>
+      <div id="tooltip"></div>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

@@ -6,7 +6,7 @@ const WIDTH = 720;
 const HEIGHT = 480;
 const MARGIN = { top: 16, right: 16, bottom: 48, left: 56 };
 const GRID_SIZE = 120;
-const DOMAIN = { x: [0, 17], y: [35, 100] };
+const DOMAIN = { x: [0, 25], y: [35, 102] };
 
 const COLORS = {
   approved: [42, 120, 214],

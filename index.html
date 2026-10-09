@@ -25,6 +25,11 @@
         font: inherit; color: var(--approved); background: none; border: none;
         padding: 0; cursor: pointer; text-decoration: underline;
       }
+      #export {
+        font: inherit; font-size: 14px; color: #fff; background: var(--approved);
+        border: none; border-radius: 6px; padding: 8px 14px; margin-bottom: 16px; cursor: pointer;
+      }
+      #export:disabled { background: var(--grid); color: var(--text-secondary); cursor: not-allowed; }
       .legend { display: flex; gap: 20px; font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
       .legend span { display: inline-flex; align-items: center; gap: 6px; }
       .legend svg { overflow: visible; }
@@ -48,6 +53,8 @@
       <kbd>`</kbd> (crase) para mostrar ou esconder, ou
       <button type="button" onclick="tfvis.visor().toggle()">clique aqui</button>.
     </p>
+
+    <button id="export" type="button" disabled>Exportar modelo</button>
 
     <div class="legend">
       <span><svg width="10" height="10"><circle cx="5" cy="5" r="5" fill="var(--approved)" /></svg>Aprovado (real)</span>

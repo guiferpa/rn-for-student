@@ -30,6 +30,12 @@ async function run() {
   render.render(canvas, grid, testPoints);
   render.attachTooltip(canvas, document.getElementById("tooltip"), testPoints);
 
+  const exportButton = document.getElementById("export");
+  exportButton.disabled = false;
+  exportButton.addEventListener("click", () =>
+    utils.exportModel(model, minv, maxv, "downloads://modelo-aprovacao"),
+  );
+
   const hits = testPoints.filter((p) => p.correct).length;
   document.getElementById("status").textContent =
     `Acurácia no teste: ${hits}/${testPoints.length} (${((hits / testPoints.length) * 100).toFixed(1)}%). Passe o mouse nos pontos para detalhes.`;

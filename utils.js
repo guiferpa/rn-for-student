@@ -17,3 +17,12 @@ export async function predictApproval(model, xs, minv, maxv) {
   // Saída softmax: [rejeição, aprovação] por linha
   return xs.map((_, i) => values[i * 2 + 1]);
 }
+
+// Salva o modelo junto com os limites da normalização, necessários para
+// normalizar novas entradas do mesmo jeito que no treino.
+export async function exportModel(model, minv, maxv, destination) {
+  model.setUserDefinedMetadata({
+    normalization: { min: await minv.array(), max: await maxv.array() },
+  });
+  return model.save(destination);
+}

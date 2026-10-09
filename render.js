@@ -217,3 +217,27 @@ export function attachTooltip(canvas, tooltip, testPoints) {
     tooltip.style.display = "none";
   });
 }
+
+export function attachPredictionForm(form, output, predict) {
+  form.querySelector("button").disabled = false;
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const hours = Number(form.elements.hours.value);
+    const attendance = Number(form.elements.attendance.value);
+    const prob = await predict(hours, attendance);
+
+    const approved = prob >= 0.5;
+    const color = `rgb(${(approved ? COLORS.approved : COLORS.rejected).join(",")})`;
+    const marker = approved
+      ? `<svg width="10" height="10"><circle cx="5" cy="5" r="5" fill="${color}" /></svg>`
+      : `<svg width="10" height="10"><rect width="10" height="10" fill="${color}" /></svg>`;
+
+    output.innerHTML = `
+      ${marker}
+      <span><strong>${approved ? "Aprovado" : "Reprovado"}</strong>:
+      ${(prob * 100).toFixed(1)}% de chance de aprovação
+      (${hours}h de estudo · ${attendance}% de frequência)</span>
+    `;
+  });
+}

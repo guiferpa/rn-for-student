@@ -25,11 +25,20 @@
         font: inherit; color: var(--approved); background: none; border: none;
         padding: 0; cursor: pointer; text-decoration: underline;
       }
-      #export {
+      #export, #predict button {
         font: inherit; font-size: 14px; color: #fff; background: var(--approved);
-        border: none; border-radius: 6px; padding: 8px 14px; margin-bottom: 16px; cursor: pointer;
+        border: none; border-radius: 6px; padding: 8px 14px; cursor: pointer;
       }
-      #export:disabled { background: var(--grid); color: var(--text-secondary); cursor: not-allowed; }
+      #export { margin-bottom: 16px; }
+      #export:disabled, #predict button:disabled { background: var(--grid); color: var(--text-secondary); cursor: not-allowed; }
+      #predict { display: flex; align-items: flex-end; gap: 12px; margin-top: 20px; }
+      #predict label { display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--text-secondary); }
+      #predict input {
+        font: inherit; font-size: 14px; width: 120px; padding: 7px 8px;
+        border: 1px solid var(--grid); border-radius: 6px; background: #fff; color: var(--text-primary);
+      }
+      #prediction { margin-top: 12px; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+      #prediction svg { flex: none; }
       .legend { display: flex; gap: 20px; font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
       .legend span { display: inline-flex; align-items: center; gap: 6px; }
       .legend svg { overflow: visible; }
@@ -67,6 +76,19 @@
       <canvas id="boundary"></canvas>
       <div id="tooltip"></div>
     </div>
+
+    <form id="predict">
+      <label>
+        Horas de estudo por semana (0–24)
+        <input name="hours" type="number" min="0" max="24" step="0.5" value="15" required>
+      </label>
+      <label>
+        Frequência no curso (40–100%)
+        <input name="attendance" type="number" min="40" max="100" step="1" value="80" required>
+      </label>
+      <button type="submit" disabled>Prever</button>
+    </form>
+    <div id="prediction"></div>
 
     <script type="module" src="./app.js"></script>
   </body>

@@ -36,6 +36,13 @@ async function run() {
     utils.exportModel(model, minv, maxv, "downloads://modelo-aprovacao"),
   );
 
+  render.attachPredictionForm(
+    document.getElementById("predict"),
+    document.getElementById("prediction"),
+    async (hours, attendance) =>
+      (await utils.predictApproval(model, [[hours, attendance]], minv, maxv))[0],
+  );
+
   const hits = testPoints.filter((p) => p.correct).length;
   document.getElementById("status").textContent =
     `Acurácia no teste: ${hits}/${testPoints.length} (${((hits / testPoints.length) * 100).toFixed(1)}%). Passe o mouse nos pontos para detalhes.`;

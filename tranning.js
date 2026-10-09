@@ -8,7 +8,7 @@
  * MODEL:
  * - Two hidden dense layers of 16 units with relu activation, so the network can bend
  *   the decision boundary into the L-shaped corner of the approval rule.
- * - Softmax output with 2 units, trained with Adam (learning rate 0.01) for 500 epochs.
+ * - Softmax output with 2 units, trained with Adam (learning rate 0.01) for 200 epochs.
  *
  * DATA STRUCTURE EXPLANATION:
  * - Approval rule: attendance >= 80% AND weekly study hours >= 15.
@@ -60,7 +60,7 @@ export default async function tranning(xs, ys, callbacks) {
 
   await model.fit(tensor, tf.tensor2d(ys), {
     verbose: 0,
-    epochs: 500,
+    epochs: 200,
     shuffle: true,
     callbacks: callbacks || {
       onEpochEnd(epoch, log) {

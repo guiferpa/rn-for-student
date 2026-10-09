@@ -16,6 +16,15 @@
       body { font-family: sans-serif; padding: 20px; background: var(--surface); color: var(--text-primary); }
       h1 { color: #333; font-size: 20px; margin: 0 0 4px; }
       p { color: var(--text-secondary); margin: 0 0 16px; }
+      .hint { font-size: 13px; }
+      kbd {
+        font-family: monospace; font-size: 12px; padding: 1px 6px;
+        border: 1px solid var(--grid); border-bottom-width: 2px; border-radius: 4px; background: #fff;
+      }
+      .hint button {
+        font: inherit; color: var(--approved); background: none; border: none;
+        padding: 0; cursor: pointer; text-decoration: underline;
+      }
       .legend { display: flex; gap: 20px; font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
       .legend span { display: inline-flex; align-items: center; gap: 6px; }
       .legend svg { overflow: visible; }
@@ -34,6 +43,11 @@
   <body>
     <h1>Fronteira de decisão: horas de estudo × frequência</h1>
     <p id="status">Treinando o modelo...</p>
+    <p class="hint">
+      Os gráficos do treino (loss e acurácia) ficam no painel lateral. Se ele sumir, aperte
+      <kbd>`</kbd> (crase) para mostrar ou esconder, ou
+      <button type="button" onclick="tfvis.visor().toggle()">clique aqui</button>.
+    </p>
 
     <div class="legend">
       <span><svg width="10" height="10"><circle cx="5" cy="5" r="5" fill="var(--approved)" /></svg>Aprovado (real)</span>

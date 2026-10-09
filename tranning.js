@@ -24,8 +24,15 @@ export default async function tranning(xs, ys, callbacks) {
   model.add(
     tf.layers.dense({
       inputShape: [2],
-      units: 10,
-      activation: "sigmoid",
+      units: 16,
+      activation: "relu",
+    }),
+  );
+
+  model.add(
+    tf.layers.dense({
+      units: 16,
+      activation: "relu",
     }),
   );
 
@@ -37,7 +44,7 @@ export default async function tranning(xs, ys, callbacks) {
   );
 
   model.compile({
-    optimizer: "adam",
+    optimizer: tf.train.adam(0.01),
     loss: "categoricalCrossentropy",
     metrics: ["accuracy"],
   });

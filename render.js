@@ -28,7 +28,7 @@ const scaleY = (v) =>
 
 const gridIndex = (i, j) => j * (GRID_SIZE + 1) + i;
 
-// Probabilidade de aprovação -> cor divergente (vermelho <-> cinza <-> azul)
+// Approval probability -> diverging color (red <-> gray <-> blue)
 function probColor(p) {
   const t = Math.abs(p - 0.5) * 2;
   const pole = p >= 0.5 ? COLORS.approved : COLORS.rejected;
@@ -36,7 +36,7 @@ function probColor(p) {
   return `rgba(${rgb.join(",")}, 0.35)`;
 }
 
-// Pontos [horas, frequência] que cobrem todo o plano do gráfico
+// [hours, attendance] points covering the whole chart plane
 export function gridPoints() {
   const points = [];
   for (let j = 0; j <= GRID_SIZE; j++) {
@@ -50,7 +50,7 @@ export function gridPoints() {
   return points;
 }
 
-// Marching squares: segmentos onde a probabilidade cruza 50%
+// Marching squares: segments where the probability crosses 50%
 function boundarySegments(points, probs) {
   const segments = [];
   const lerp = (a, b, va, vb) => {
@@ -152,7 +152,7 @@ export function render(canvas, grid, testPoints) {
   ctx.fillStyle = COLORS.surface;
   ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
-  // Fundo: probabilidade de aprovação em cada ponto do plano
+  // Background: approval probability at each point of the plane
   const cellW = plot.w / GRID_SIZE;
   const cellH = plot.h / GRID_SIZE;
   grid.points.forEach(([x, y], k) => {
@@ -162,7 +162,7 @@ export function render(canvas, grid, testPoints) {
 
   drawAxes(ctx);
 
-  // A "linha deformada": fronteira de decisão em 50%
+  // The "deformed line": decision boundary at 50%
   ctx.save();
   ctx.beginPath();
   ctx.rect(plot.x0, plot.y0, plot.w, plot.h);

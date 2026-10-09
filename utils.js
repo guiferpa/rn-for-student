@@ -14,12 +14,12 @@ export async function predictApproval(model, xs, minv, maxv) {
   const pred = model.predict(tensor);
   const values = await pred.data();
   tf.dispose([tensor, pred]);
-  // Saída softmax: [rejeição, aprovação] por linha
+  // Softmax output: [rejection, approval] per row
   return xs.map((_, i) => values[i * 2 + 1]);
 }
 
-// Salva o modelo junto com os limites da normalização, necessários para
-// normalizar novas entradas do mesmo jeito que no treino.
+// Saves the model along with the normalization bounds, needed to normalize
+// new inputs the same way as in training.
 export async function exportModel(model, minv, maxv, destination) {
   model.setUserDefinedMetadata({
     normalization: { min: await minv.array(), max: await maxv.array() },
